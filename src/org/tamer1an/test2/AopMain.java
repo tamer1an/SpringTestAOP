@@ -6,16 +6,18 @@ import org.tamer1an.test2.service.ShapeService;
 
 public class AopMain {
 
+	private static AbstractApplicationContext ctx;
+
 	/*
 	 * @param args
 	 */
 	public static void main(String[] args) { // ApplicationContext 
 		
-		AbstractApplicationContext ctx = new ClassPathXmlApplicationContext("spring.xml");
+		ctx = new ClassPathXmlApplicationContext("spring.xml");
 		ctx.registerShutdownHook();
 		
 		ShapeService shapeService = (ShapeService) ctx.getBean("shapeService", ShapeService.class);
 	
-		System.out.println(shapeService.getCircle().getName());	
+		System.out.println(shapeService.getTriangle().getName());	
 	}
 }
