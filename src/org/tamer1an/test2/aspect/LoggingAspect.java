@@ -1,5 +1,6 @@
 package org.tamer1an.test2.aspect;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -13,9 +14,9 @@ public class LoggingAspect {
 		
 	}
 	
-	@Before("allGetters()")
-	public void SecondAdvice(){
-		System.out.println("Advice 2 is run, on Get method");
+	@Before("within(org.tamer1an.test2.model.Triangle)")
+	public void SecondAdvice(JoinPoint joinPoint){
+		System.out.println("Advice 2 is run, on" + joinPoint.toString());
 		
 	}
 	
