@@ -2,13 +2,26 @@ package org.tamer1an.test2.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 @Aspect 
 public class LoggingAspect {
 
-	@Before("execution(public String getName())")
+	@Before("allGetters() && allCircleMethods()")
 	public void LoggingAdvice(){
 		System.out.println("Advice run, on Get method");
 		
 	}
+	
+	@Before("allGetters()")
+	public void SecondAdvice(){
+		System.out.println("Advice 2 is run, on Get method");
+		
+	}
+	
+	@Pointcut("execution(public * get*())")
+	public void allGetters(){}
+	
+	@Pointcut("within(org.tamer1an.test2.model.Circle)")
+	public void allCircleMethods(){}
 }
