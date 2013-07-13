@@ -17,6 +17,7 @@ public class LoggingAspect {
 	@Before("within(org.tamer1an.test2.model.Triangle)")
 	public void SecondAdvice(JoinPoint joinPoint){
 		System.out.println("Advice 2 is run, on" + joinPoint.toString());
+		System.out.println(joinPoint.getTarget());
 		
 	}
 	
