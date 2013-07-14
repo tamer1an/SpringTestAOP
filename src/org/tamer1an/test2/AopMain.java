@@ -17,7 +17,8 @@ public class AopMain {
 		ctx.registerShutdownHook();
 		
 		ShapeService shapeService = (ShapeService) ctx.getBean("shapeService", ShapeService.class);
-	
+		
+		shapeService.getTriangle().setName("New name");
 		System.out.println(shapeService.getTriangle().getName());	
 	}
 }
