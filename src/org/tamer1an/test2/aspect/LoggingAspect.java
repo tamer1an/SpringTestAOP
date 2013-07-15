@@ -1,11 +1,13 @@
 package org.tamer1an.test2.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.tamer1an.test2.model.Circle;
-import org.tamer1an.test2.model.Triangle;
 
 @Aspect 
 public class LoggingAspect {
@@ -23,11 +25,15 @@ public class LoggingAspect {
 		System.out.println("Advice 2 is run, on" + joinPoint.toString());
 		System.out.println(joinPoint.getTarget());
 //		circle = (Circle) joinPoint.getTarget();	
+	}	
+	
+	@AfterThrowing(pointcut="args(name)", throwing="ex")
+	public void exeptionAdvice(String name, RuntimeException ex){  // Exception Ex
+		System.out.println("args(String) " +name);
 	}
 	
-	
-	@Before("args(name)")
-	public void strArgMethods(String name){		
+	@AfterReturning(pointcut="args(name)", returning="returnString")
+	public void strArgMethods(String name, String returnString){		
 		System.out.println("args(String) " +name);
 	}
 	
@@ -36,4 +42,12 @@ public class LoggingAspect {
 	
 	@Pointcut("within(org.tamer1an.test2.model.Circle)")
 	public void allCircleMethods(){}
+
+	public Circle getCircle() {
+		return circle;
+	}
+
+	public void setCircle(Circle circle) {
+		this.circle = circle;
+	}
 }
