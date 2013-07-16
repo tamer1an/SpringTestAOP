@@ -1,9 +1,12 @@
 package org.tamer1an.test2.aspect;
 
+import org.aspectj.ajdt.internal.compiler.ast.Proceed;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -35,6 +38,21 @@ public class LoggingAspect {
 	@AfterReturning(pointcut="args(name)", returning="returnString")
 	public void strArgMethods(String name, String returnString){		
 		System.out.println("args(String) " +name);
+	}
+	
+	@Around("allGetters()")
+	public Object myAround(ProceedingJoinPoint proceedingJoinPoint){	
+		Object returnValue = null;
+		
+		try {
+			System.out.println("---- Before around ----");
+			returnValue = proceedingJoinPoint.proceed();
+			System.out.println("---- After around ----");
+		} catch (Throwable e) {
+			System.out.println("---- After throwing ----");  //	e.printStackTrace();		
+		}		
+		System.out.println("---- After finaly ----");	
+		return returnValue;
 	}
 	
 	@Pointcut("execution(public * get*())")
