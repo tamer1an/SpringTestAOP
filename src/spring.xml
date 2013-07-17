@@ -6,9 +6,7 @@
 		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
 				http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd		
 				http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-<!-- 	
-	<context:annotation-config/> 				
--->
+
 	<aop:aspectj-autoproxy />
 	
 	<bean name ="triangle" class="org.tamer1an.test2.model.Triangle">
@@ -22,4 +20,12 @@
 	<bean name="shapeService" class="org.tamer1an.test2.service.ShapeService" autowire="byName"/>
 	
 	<bean name="loggingAspect" class="org.tamer1an.test2.aspect.LoggingAspect" />
+	
+	<aop:config>
+		<aop:aspect id="loggingAspect" ref="loggingAspect">
+			<aop:pointcut expression="execution(public * get*())" id="allGetters"/>
+			<aop:around pointcut-ref="allGetters" method="myAround"/>
+		</aop:aspect>		
+	</aop:config>
+	
 </beans>
