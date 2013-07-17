@@ -40,7 +40,8 @@ public class LoggingAspect {
 		System.out.println("args(String) " +name);
 	}
 	
-	@Around("allGetters()")
+
+	@Around("@annotation(org.tamer1an.test2.aspect.Loggable)") //	@Around("allGetters()")
 	public Object myAround(ProceedingJoinPoint proceedingJoinPoint){	
 		Object returnValue = null;
 		
