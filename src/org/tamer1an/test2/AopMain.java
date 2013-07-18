@@ -1,9 +1,6 @@
 package org.tamer1an.test2;
 
-import jdk.nashorn.internal.runtime.regexp.JoniRegExp.Factory;
-
 import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.tamer1an.test2.service.FactoryService;
 import org.tamer1an.test2.service.ShapeService;
 
