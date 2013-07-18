@@ -19,6 +19,9 @@ public class LoggingAspect {
 		return returnValue;
 	}
 
+	public void loggingAdvice(){
+		System.out.println("Aspect run!");
+	}
 }
 
 
